@@ -1,0 +1,16 @@
+[package]
+version = "0.1.0"
+name = "secp256k1-script"
+edition = "2021"
+default-run = "secp256k1-script"
+
+[[bin]]
+name = "secp256k1-script"
+path = "src/bin/main.rs"
+
+[dependencies]
+sp1-sdk = { version = "6.0.1", features = ["blocking", "native-gnark"] }
+secp256k1 = { version = "0.29", features = ["hashes", "rand"] }
+
+[build-dependencies]
+sp1-build = { version = "6.0.1" }
