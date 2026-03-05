@@ -1,3 +1,8 @@
 [workspace]
 members = ["program", "script"]
 resolver = "2"
+
+[workspace.dependencies]
+secp256k1 = "0.29.1"
+# Uncomment this (and comment previous line) to use SP1 precompiles
+# secp256k1 = { git = "https://github.com/sp1-patches/rust-secp256k1", tag = "patch-0.29.1-sp1-6.0.0" }
