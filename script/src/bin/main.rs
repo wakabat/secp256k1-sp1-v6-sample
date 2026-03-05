@@ -8,16 +8,19 @@ use sp1_sdk::{
 /// The ELF (executable and linkable format) file for the Succinct RISC-V zkVM.
 const FIBONACCI_ELF: Elf = include_elf!("fibonacci-program");
 
-const COUNT: u64 = 100;
-
 fn main() {
     sp1_sdk::utils::setup_logger();
 
+    let count: u64 = match std::env::var("COUNT") {
+        Ok(val) => str::parse(&val).expect("parse count"),
+        Err(_) => 100,
+    };
+
     let secp = Secp256k1::new();
     let mut stdin = SP1Stdin::new();
-    stdin.write(&COUNT);
+    stdin.write(&count);
 
-    for _ in 0..COUNT {
+    for _ in 0..count {
         let (secret_key, public_key) = secp.generate_keypair(&mut OsRng);
         let digest = {
             let mut digest = [0u8; 32];
